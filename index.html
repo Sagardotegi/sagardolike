@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+//var x = document.getElementById("demo");
+
+
+//function getLocation() {
+    /*global navigator*/
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        window.location.href = "sagardotegiak.html";
+    }
+//}
+
+function showPosition(position) {
+    var url2 = get_json("https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyCBpJ_0Fjt-3R9cQL8SakAD117I2Z-Jb1g");
+    var json2 = JSON.parse(url2);
+    var  a2 = json2.results[0].formatted_address;
+    
+    window.location.href = "gps.php?ubicacion=" + a2;
+
+}
+
+function get_json(url) {
+    var resp ;
+    var xmlHttp ;
+    
+    resp  = '' ;
+    xmlHttp = new XMLHttpRequest();
+    
+    if(xmlHttp != null)
+    {
+        xmlHttp.open( "GET", url, false );
+        xmlHttp.send( null );
+        resp = xmlHttp.responseText;
+    }
+    
+    return resp ;
+}
+
+//var url = get_json("https://maps.googleapis.com/maps/api/geocode/json?address=79+ere%C3%B1ozu&key=AIzaSyCBpJ_0Fjt-3R9cQL8SakAD117I2Z-Jb1g");
+//var json = JSON.parse(url);
+//var  a = json.results[0].geometry.location.lat;
+//window.alert(a);
+
+
+</script>
+
+</body>
+</html>
